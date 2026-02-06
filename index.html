@@ -213,4 +213,97 @@
       // Açılma animasiyası – hər bölmə üçün
       const overlay = document.getElementById('unlock-overlay');
       overlay.classList.remove('hidden');
-      const icon = document.getElementBy
+      const icon = document.getElementById('unlock-icon');
+      icon.classList.add('unlocking');
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        icon.classList.remove('unlocking'); // ikon animasiyasını sıfırla
+        document.getElementById(id).classList.remove('hidden');
+
+        if (id.startsWith('secret-step')) {
+          const step = id.replace('secret-step', '');
+          startTimer(step);
+        } else {
+          stopTimer();
+        }
+      }, 2000);
+    }
+
+    function backToMain() {
+      stopTimer();
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.getElementById('main-screen').classList.remove('hidden');
+      document.getElementById('body').style.background = "linear-gradient(135deg, #fffaf0 0%, #ffebee 100%)";
+      stopHearts();
+      document.getElementById('unlock-overlay').classList.add('hidden');
+      document.getElementById('correct-popup').classList.add('hidden');
+    }
+
+    function startSecretPath() {
+      showSection('secret-step1');
+    }
+
+    function showCorrectAnimation() {
+      const popup = document.getElementById('correct-popup');
+      popup.classList.remove('hidden');
+      setTimeout(() => popup.classList.add('hidden'), 1500);
+    }
+
+    function checkAnswer(step) {
+      let ans = document.getElementById(`answer${step}`).value.trim().toLowerCase();
+      let correct = false;
+
+      if (step === 1) correct = ans.includes('şahmat kursunun yanı') || ans.includes('şahmat kursu yanı');
+      else if (step === 2) correct = ans.includes('bilge');
+      else if (step === 3) correct = ans.includes('prenses');
+      else if (step === 4) correct = ans.includes('yasamal') || ans.includes('yasamal park');
+      else if (step === 5) correct = ans.includes('dudu') && ans.includes('bubu');
+
+      if (correct) {
+        stopTimer();
+        showCorrectAnimation();
+
+        if (step === 1) showSection('secret-step2');
+        if (step === 2) showSection('secret-step3');
+        if (step === 3) showSection('secret-step4');
+        if (step === 4) showSection('secret-step5');
+        if (step === 5) {
+          showSection('secret-final');
+          document.getElementById('body').style.background = "linear-gradient(135deg, #ffccd5, #ff9aa2)";
+          startHearts();
+        }
+      } else {
+        let msg = '';
+        if (step === 1) msg = 'O gün sənə birşey gətirmişdim ❤️';
+        else if (step === 2) msg = 'Sənə bunun hekayələrini danışırdım ❤️';
+        else if (step === 3) msg = '';
+        else if (step === 4) msg = 'Orda kiçik bir Kola faciəsi yaşanmışdı 😂❤️';
+        else if (step === 5) msg = 'Kaktusu xatırla ❤️';
+
+        if (msg) {
+          alert(msg);
+        } else {
+          alert('Yanlış cavab... Yenidən cəhd et, xatırla bizi ❤️');
+        }
+      }
+    }
+
+    function startHearts() {
+      const c = document.getElementById('hearts-container');
+      for (let i = 0; i < 30; i++) {
+        const h = document.createElement('div');
+        h.classList.add('heart');
+        h.innerHTML = '❤️';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        c.appendChild(h);
+      }
+    }
+
+    function stopHearts() {
+      document.getElementById('hearts-container').innerHTML = '';
+    }
+  </script>
+</body>
+</html>
