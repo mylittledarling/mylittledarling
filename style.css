@@ -144,7 +144,7 @@ body {
   animation: fadeIn 1.2s forwards;
 }
 
-/* Oxunaqlı və premium başlıq */
+/* Oxunaqlı başlıq */
 .subtitle {
   font-family: 'Playfair Display', serif;
   font-size: 3.8rem;
@@ -164,7 +164,7 @@ body {
   50% { opacity: 0.92; transform: scale(1.02); }
 }
 
-/* Seçim yazıları – premium stil */
+/* Seçim yazıları */
 .icon p {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
