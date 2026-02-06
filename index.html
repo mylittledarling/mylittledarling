@@ -11,7 +11,7 @@
 <body id="body">
   <div id="hearts-container"></div>
 
-  <!-- Açılma animasiyası (bütün bölmələr üçün) -->
+  <!-- Açılma animasiyası -->
   <div id="unlock-overlay" class="hidden">
     <div class="unlock-animation">
       <i class="fas fa-lock fa-8x" id="unlock-icon"></i>
@@ -61,7 +61,7 @@
   <!-- Musiqi -->
   <div id="music" class="section hidden">
     <h2>Sənə xüsusi hazırlanmış mahnı 🎶</h2>
-    <audio controls>
+    <audio id="musicPlayer" controls>
       <source src="musiqi.mp3" type="audio/mpeg">
       Brauzerin audio dəstəkləmir.
     </audio>
@@ -210,7 +210,6 @@
       document.getElementById('main-screen').classList.add('hidden');
       document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
 
-      // Açılma animasiyası – hər bölmə üçün
       const overlay = document.getElementById('unlock-overlay');
       overlay.classList.remove('hidden');
       const icon = document.getElementById('unlock-icon');
@@ -218,8 +217,17 @@
 
       setTimeout(() => {
         overlay.classList.add('hidden');
-        icon.classList.remove('unlocking'); // ikon animasiyasını sıfırla
+        icon.classList.remove('unlocking');
         document.getElementById(id).classList.remove('hidden');
+
+        // Mahnı bölməsi açılarsa, başdan başla
+        if (id === 'music') {
+          const player = document.getElementById('musicPlayer');
+          if (player) {
+            player.currentTime = 0; // Başdan başla
+            player.play().catch(() => {}); // Autoplay bloklanırsa xəta verməsin
+          }
+        }
 
         if (id.startsWith('secret-step')) {
           const step = id.replace('secret-step', '');
@@ -238,6 +246,10 @@
       stopHearts();
       document.getElementById('unlock-overlay').classList.add('hidden');
       document.getElementById('correct-popup').classList.add('hidden');
+
+      // Musiqi dayandır (geri qayıdanda)
+      const player = document.getElementById('musicPlayer');
+      if (player) player.pause();
     }
 
     function startSecretPath() {
