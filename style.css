@@ -1,0 +1,247 @@
+body {
+  margin: 0;
+  font-family: 'Lora', serif;
+  background: linear-gradient(135deg, #fffaf0 0%, #ffebee 100%);
+  color: #4a2c2a;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  transition: background 1.5s ease;
+}
+
+#hearts-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  font-size: 2.2rem;
+  animation: floatUp linear forwards;
+  opacity: 0.85;
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-150vh) rotate(720deg); opacity: 0; }
+}
+
+/* Unlock overlay */
+#unlock-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.unlock-animation {
+  text-align: center;
+  color: white;
+}
+
+#unlock-icon {
+  color: #e91e63;
+  transition: all 1.5s ease;
+}
+
+#unlock-icon.unlocking {
+  animation: unlockSpin 1.5s ease forwards;
+}
+
+@keyframes unlockSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(360deg) scale(1.3); }
+  100% { transform: rotate(720deg) scale(0.5); opacity: 0; }
+}
+
+#unlock-text {
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+/* Correct popup */
+#correct-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.correct-animation {
+  font-size: 5rem;
+  color: #ff4081;
+  font-family: 'Playfair Display', serif;
+  text-shadow: 0 0 20px rgba(255,64,129,.8);
+  animation: correctPop 1.5s ease;
+}
+
+@keyframes correctPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Timer */
+.timer-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 35px;
+}
+
+.timer-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(#e91e63 0deg, #e91e63 var(--progress, 360deg), #ffb6c1 var(--progress, 360deg), #ffb6c1 360deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(233,30,99,.3);
+}
+
+.timer-ring::before {
+  content: "";
+  position: absolute;
+  inset: 17px;
+  background: rgba(255,255,255,.92);
+  border-radius: 50%;
+  box-shadow: inset 0 4px 15px rgba(233,30,99,.1);
+}
+
+.timer-text {
+  z-index: 2;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #c2185b;
+  text-shadow: 0 2px 8px rgba(194,24,91,.2);
+}
+
+.timer-ring.warning .timer-text {
+  color: #ff1744;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse { 50% { transform: scale(1.08); } }
+
+.timeout-message {
+  font-size: 2rem;
+  color: #c2185b;
+  margin: 30px 0;
+  font-style: italic;
+  animation: fadeIn 1.2s forwards;
+}
+
+/* Oxunaqlı və premium başlıq */
+.subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: #c2185b;
+  margin-bottom: 80px;
+  letter-spacing: 1.5px;
+  text-shadow: 0 3px 12px rgba(194, 24, 91, 0.35);
+  background: linear-gradient(90deg, #c2185b, #e91e63, #c2185b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gentlePulse 5s infinite ease-in-out;
+}
+
+@keyframes gentlePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.92; transform: scale(1.02); }
+}
+
+/* Seçim yazıları – premium stil */
+.icon p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #c2185b;
+  margin-top: 18px;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 10px rgba(194, 24, 91, 0.25);
+  transition: all 0.4s ease;
+}
+
+.icon:hover p {
+  color: #db7093;
+  transform: scale(1.1);
+  text-shadow: 0 4px 20px rgba(219, 112, 147, 0.5);
+}
+
+/* Digər stillər */
+h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #c2185b; margin-bottom: 20px; text-shadow: 1px 1px 5px rgba(194,24,91,.2); }
+
+.icons { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; }
+.icon { cursor: pointer; transition: all .4s; padding: 20px; border-radius: 50%; background: rgba(255,255,255,.6); box-shadow: 0 10px 30px rgba(194,24,91,.15); }
+.icon:hover { transform: translateY(-15px) scale(1.15); box-shadow: 0 20px 40px rgba(194,24,91,.3); }
+
+.hidden { display: none !important; }
+
+.section { max-width: 90%; padding: 40px 20px; animation: fadeIn .8s; }
+
+h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #c2185b; margin-bottom: 20px; }
+
+.hint { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 600; color: #b71c1c; margin: 20px 0 45px; line-height: 1.35; letter-spacing: 0.8px; text-shadow: 0 2px 10px rgba(183,28,28,.12); }
+
+input[type="text"] {
+  width: 88%;
+  max-width: 460px;
+  padding: 22px 28px;
+  font-size: 1.55rem;
+  font-family: 'Lora', serif;
+  color: #3e2723;
+  background: rgba(255,255,255,.82);
+  border: 2.5px solid #f06292;
+  border-radius: 20px;
+  transition: all .4s;
+  box-shadow: inset 0 3px 12px rgba(0,0,0,.08);
+}
+
+input[type="text"]:focus {
+  border-color: #d81b60;
+  box-shadow: 0 0 0 5px rgba(216,27,96,.22);
+  background: white;
+  transform: scale(1.03);
+}
+
+button {
+  margin-top: 35px;
+  padding: 16px 60px;
+  font-size: 1.35rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, #ff69b4, #db7093);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(219,112,147,.35);
+  transition: all .4s;
+}
+
+button:hover {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 18px 40px rgba(219,112,147,.5);
+  background: linear-gradient(135deg, #ff1493, #c71585);
+}
+
+.surprise-image { max-width: 90%; max-height: 65vh; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,.2); margin: 30px auto; display: block; border: 8px solid white; }
+
+.content { font-size: 1.4rem; line-height: 1.8; max-width: 800px; margin: 0 auto 40px; text-align: left; color: #3e2723; }
+
+.final-message h2 { font-size: 3rem; color: #c2185b; }
+.love-text { font-size: 2.2rem; margin: 15px 0; color: #4a2c2a; }
+.love-text.big { font-size: 3.5rem; font-weight: bold; color: #e91e63; text-shadow: 2px 2px 8px rgba(233,30,99,.4); }
