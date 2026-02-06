@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sənə Xüsusi Sürpriz ❤️</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body id="body">
+  <div id="hearts-container"></div>
+
+  <!-- Kilid açılma animasiyası -->
+  <div id="unlock-overlay" class="hidden">
+    <div class="unlock-animation">
+      <i class="fas fa-lock fa-8x" id="unlock-icon"></i>
+      <p id="unlock-text">Açılır... 💕</p>
+    </div>
+  </div>
+
+  <!-- Doğru cavab animasiyası -->
+  <div id="correct-popup" class="hidden">
+    <div class="correct-animation">
+      <p>Doğru! ❤️</p>
+    </div>
+  </div>
+
+  <div id="main-screen">
+    <h1>Sənin Üçün Bir Neçə Hədiyyə Hazırlamışam ❤️</h1>
+    <p class="subtitle">Qəlbim sənə nə hədiyyə versin, sevgilim?</p>
+    
+    <div class="icons">
+      <div class="icon" onclick="showSection('image')">
+        <i class="fas fa-heart fa-6x"></i>
+        <p>Şəkil</p>
+      </div>
+      <div class="icon" onclick="showSection('music')">
+        <i class="fas fa-music fa-6x"></i>
+        <p>Musiqi</p>
+      </div>
+      <div class="icon" onclick="showSection('letter')">
+        <i class="fas fa-envelope fa-6x"></i>
+        <p>Məktub</p>
+      </div>
+      <div class="icon" onclick="startSecretPath()">
+        <i class="fas fa-lock fa-6x"></i>
+        <p>Gizli Hədiyyə</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Şəkil -->
+  <div id="image" class="section hidden">
+    <h2>Bizim xüsusi anımız 📸</h2>
+    <img src="sekil.jpg" alt="Sənin şəklin" class="surprise-image"/>
+    <p>Bu şəkil sənin üçün xüsusi hazırlanmışdır ❤️</p>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- Musiqi -->
+  <div id="music" class="section hidden">
+    <h2>Sənə xüsusi hazırlanmış mahnı 🎶</h2>
+    <audio controls>
+      <source src="musiqi.mp3" type="audio/mpeg">
+      Brauzerin audio dəstəkləmir.
+    </audio>
+    <p>Dinlə və gülümse... Bu sənə məxsusdur ❤️</p>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- Məktub -->
+  <div id="letter" class="section hidden">
+    <h2>Sənə yazdığım məktub ❤️</h2>
+    <div class="content">
+      Əziz Yasemin,  
+      Səni ilk gördüyüm andan...  
+      (buraya tam məktubunu yapışdır)  
+      Səni çox sevirəm,  
+      [Adın]
+    </div>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- Gizli Yol – 1 -->
+  <div id="secret-step1" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring1">
+        <div class="timer-text" id="timer1">02:00</div>
+      </div>
+    </div>
+    <h2>Gizli Yol Başladı 💕</h2>
+    <p class="hint">İlk görüş yerimiz harada idi?</p>
+    <input type="text" id="answer1" placeholder="Cavabını yaz..."/>
+    <button onclick="checkAnswer(1)">Davam Et</button>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- 2 -->
+  <div id="secret-step2" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring2">
+        <div class="timer-text" id="timer2">02:00</div>
+      </div>
+    </div>
+    <h2>Bir az daha yaxın... ❤️</h2>
+    <p class="hint">Mənə ilk dəfə müraciət etdiyin ləqəb nə idi?</p>
+    <input type="text" id="answer2" placeholder="Cavabını yaz..."/>
+    <button onclick="checkAnswer(2)">Növbəti</button>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- 3 -->
+  <div id="secret-step3" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring3">
+        <div class="timer-text" id="timer3">02:00</div>
+      </div>
+    </div>
+    <h2>Davam edirik... 🥰</h2>
+    <p class="hint">Mənim sənə ilk dəfə müraciət etdiyim ləqəb nə idi?</p>
+    <input type="text" id="answer3" placeholder="Cavabını yaz..."/>
+    <button onclick="checkAnswer(3)">Növbəti</button>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- 4 -->
+  <div id="secret-step4" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring4">
+        <div class="timer-text" id="timer4">02:00</div>
+      </div>
+    </div>
+    <h2>Bir az da xatırla... 💭</h2>
+    <p class="hint">Bizim unudulmaz görüş yerimiz haradır?</p>
+    <input type="text" id="answer4" placeholder="Cavabını yaz..."/>
+    <button onclick="checkAnswer(4)">Növbəti</button>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- 5 -->
+  <div id="secret-step5" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring5">
+        <div class="timer-text" id="timer5">02:00</div>
+      </div>
+    </div>
+    <h2>Son addım, sevgilim... 🌟</h2>
+    <p class="hint">Biz kimə bənzəyirik?</p>
+    <input type="text" id="answer5" placeholder="Cavabını yaz..."/>
+    <button onclick="checkAnswer(5)">Aç Hədiyyəni</button>
+    <button onclick="backToMain()">Geri qayıt</button>
+  </div>
+
+  <!-- Final -->
+  <div id="secret-final" class="section hidden">
+    <div class="final-message">
+      <h2>Sən Bu Səhifəni Aça Bildinsə</h2>
+      <p>Deməli Məni Çox Sevirsən</p>
+      <p class="love-text">və Bilməlisən ki</p>
+      <p class="love-text big">Məndə Səni Çoox Sevirəm ❤️</p>
+    </div>
+    <button onclick="backToMain()">Ana səhifəyə qayıt</button>
+  </div>
+
+  <script>
+    let currentTimerInterval = null;
+
+    function startTimer(step) {
+      if (currentTimerInterval) clearInterval(currentTimerInterval);
+
+      let timeLeft = 120;
+      const timerText = document.getElementById(`timer${step}`);
+      const timerRing = document.getElementById(`timer-ring${step}`);
+
+      const input = document.getElementById(`answer${step}`);
+      if (input) input.value = '';
+
+      currentTimerInterval = setInterval(() => {
+        timeLeft--;
+        const min = Math.floor(timeLeft / 60);
+        const sec = timeLeft % 60;
+        timerText.textContent = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+
+        const progress = (timeLeft / 120) * 360;
+        timerRing.style.setProperty('--progress', `${progress}deg`);
+
+        if (timeLeft <= 10) timerRing.classList.add('warning');
+
+        if (timeLeft <= 0) {
+          clearInterval(currentTimerInterval);
+          timerText.textContent = "00:00";
+          const msg = document.createElement('div');
+          msg.className = 'timeout-message';
+          msg.innerHTML = 'Biraz daha cəld olmalı idin... Amma səni sevirəm ❤️';
+          timerRing.parentNode.parentNode.insertBefore(msg, timerRing.parentNode.nextSibling);
+          setTimeout(backToMain, 3000);
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (currentTimerInterval) {
+        clearInterval(currentTimerInterval);
+        currentTimerInterval = null;
+      }
+    }
+
+    function showSection(id) {
+      document.getElementById('main-screen').classList.add('hidden');
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+
+      if (id.startsWith('secret-step')) {
+        const step = id.replace('secret-step', '');
+        startTimer(step);
+      } else {
+        stopTimer();
+      }
+    }
+
+    function backToMain() {
+      stopTimer();
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.getElementById('main-screen').classList.remove('hidden');
+      document.getElementById('body').style.background = "linear-gradient(135deg, #fffaf0 0%, #ffebee 100%)";
+      stopHearts();
+      document.getElementById('unlock-overlay').classList.add('hidden');
+      document.getElementById('correct-popup').classList.add('hidden');
+    }
+
+    function startSecretPath() {
+      const overlay = document.getElementById('unlock-overlay');
+      overlay.classList.remove('hidden');
+      const icon = document.getElementById('unlock-icon');
+      icon.classList.add('unlocking');
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        showSection('secret-step1');
+      }, 2000);
+    }
+
+    function showCorrectAnimation() {
+      const popup = document.getElementById('correct-popup');
+      popup.classList.remove('hidden');
+      setTimeout(() => popup.classList.add('hidden'), 1500);
+    }
+
+    function checkAnswer(step) {
+      let ans = document.getElementById(`answer${step}`).value.trim().toLowerCase();
+      let correct = false;
+
+      if (step === 1) correct = ans.includes('şahmat kursunun yanı') || ans.includes('şahmat kursu yanı');
+      else if (step === 2) correct = ans.includes('bilge');
+      else if (step === 3) correct = ans.includes('prenses');
+      else if (step === 4) correct = ans.includes('yasamal') || ans.includes('yasamal park');
+      else if (step === 5) correct = ans.includes('dudu') && ans.includes('bubu');
+
+      if (correct) {
+        stopTimer();
+        showCorrectAnimation();
+
+        if (step === 1) showSection('secret-step2');
+        if (step === 2) showSection('secret-step3');
+        if (step === 3) showSection('secret-step4');
+        if (step === 4) showSection('secret-step5');
+        if (step === 5) {
+          showSection('secret-final');
+          document.getElementById('body').style.background = "linear-gradient(135deg, #ffccd5, #ff9aa2)";
+          startHearts();
+        }
+      } else {
+        let msg = '';
+        if (step === 1) msg = 'O gün sənə birşey gətirmişdim ❤️';
+        else if (step === 2) msg = 'Sənə bunun hekayələrini danışırdım ❤️';
+        else if (step === 3) msg = '';
+        else if (step === 4) msg = 'Orda kiçik bir Kola faciəsi yaşanmışdı 😂❤️';
+        else if (step === 5) msg = 'Kaktusu xatırla ❤️';
+
+        if (msg) {
+          alert(msg);
+        } else {
+          alert('Yanlış cavab... Yenidən cəhd et, xatırla bizi ❤️');
+        }
+      }
+    }
+
+    function startHearts() {
+      const c = document.getElementById('hearts-container');
+      for (let i = 0; i < 30; i++) {
+        const h = document.createElement('div');
+        h.classList.add('heart');
+        h.innerHTML = '❤️';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        c.appendChild(h);
+      }
+    }
+
+    function stopHearts() {
+      document.getElementById('hearts-container').innerHTML = '';
+    }
+  </script>
+</body>
+</html>
