@@ -11,7 +11,7 @@
 <body id="body">
   <div id="hearts-container"></div>
 
-  <!-- Kilid açılma animasiyası -->
+  <!-- Açılma animasiyası (bütün bölmələr üçün istifadə olunur) -->
   <div id="unlock-overlay" class="hidden">
     <div class="unlock-animation">
       <i class="fas fa-lock fa-8x" id="unlock-icon"></i>
@@ -52,6 +52,11 @@
 
   <!-- Şəkil -->
   <div id="image" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring-image">
+        <div class="timer-text">Açılır...</div>
+      </div>
+    </div>
     <h2>Bizim xüsusi anımız 📸</h2>
     <img src="sekil.jpg" alt="Sənin şəklin" class="surprise-image"/>
     <p>Bu şəkil sənin üçün xüsusi hazırlanmışdır ❤️</p>
@@ -60,6 +65,11 @@
 
   <!-- Musiqi -->
   <div id="music" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring-music">
+        <div class="timer-text">Açılır...</div>
+      </div>
+    </div>
     <h2>Sənə xüsusi hazırlanmış mahnı 🎶</h2>
     <audio controls>
       <source src="musiqi.mp3" type="audio/mpeg">
@@ -71,6 +81,11 @@
 
   <!-- Məktub -->
   <div id="letter" class="section hidden">
+    <div class="timer-container">
+      <div class="timer-ring" id="timer-ring-letter">
+        <div class="timer-text">Açılır...</div>
+      </div>
+    </div>
     <h2>Sənə yazdığım məktub ❤️</h2>
     <div class="content">
       Əziz Yasemin,  
@@ -209,14 +224,24 @@
     function showSection(id) {
       document.getElementById('main-screen').classList.add('hidden');
       document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
 
-      if (id.startsWith('secret-step')) {
-        const step = id.replace('secret-step', '');
-        startTimer(step);
-      } else {
-        stopTimer();
-      }
+      // Açılma animasiyası
+      const overlay = document.getElementById('unlock-overlay');
+      overlay.classList.remove('hidden');
+      const icon = document.getElementById('unlock-icon');
+      icon.classList.add('unlocking');
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        document.getElementById(id).classList.remove('hidden');
+
+        if (id.startsWith('secret-step')) {
+          const step = id.replace('secret-step', '');
+          startTimer(step);
+        } else {
+          stopTimer();
+        }
+      }, 2000);
     }
 
     function backToMain() {
@@ -230,15 +255,7 @@
     }
 
     function startSecretPath() {
-      const overlay = document.getElementById('unlock-overlay');
-      overlay.classList.remove('hidden');
-      const icon = document.getElementById('unlock-icon');
-      icon.classList.add('unlocking');
-
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-        showSection('secret-step1');
-      }, 2000);
+      showSection('secret-step1');
     }
 
     function showCorrectAnimation() {
