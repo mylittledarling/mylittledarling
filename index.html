@@ -11,7 +11,7 @@
 <body id="body">
   <div id="hearts-container"></div>
 
-  <!-- Açılma animasiyası -->
+  <!-- Açılma animasiyası (bütün bölmələr üçün) -->
   <div id="unlock-overlay" class="hidden">
     <div class="unlock-animation">
       <i class="fas fa-lock fa-8x" id="unlock-icon"></i>
@@ -69,15 +69,39 @@
     <button onclick="backToMain()">Geri qayıt</button>
   </div>
 
-  <!-- Məktub -->
+  <!-- Məktub (premium stil) -->
   <div id="letter" class="section hidden">
     <h2>Sənə yazdığım məktub ❤️</h2>
-    <div class="content">
-      Əziz Yasemin,  
-      Səni ilk gördüyüm andan...  
-      (buraya tam məktubunu yapışdır)  
-      Səni çox sevirəm,  
-      [Adın]
+    <div class="content premium-letter">
+      <h3 class="letter-title">Prensesim,</h3>
+      
+      <p>Sana her yazışımda kalbim biraz daha sakin, biraz daha emin atıyor. Çünkü artık seni sevmek bir heyecan değil sadece; bir huzur, bir alışkanlık, bir yuva gibi.</p>
+      
+      <p>Bugün 14 Şubat…<br>Ama ben seni bir güne sığdıramıyorum.<br>Çünkü sen, takvimde işaretlenen bir tarih değil; günlerimin içindeki en güzel detay oldun.</p>
+      
+      <p>Bazen seni izlerken yakalıyorum kendimi.<br>Konuşurken gözlerinin içi nasıl parlıyor,<br>gülerken yanakların nasıl belirginleşiyor,<br>sinirlenince kaşlarını nasıl çatıyorsun…<br>Ve her hâlinde içimden aynı cümle geçiyor:<br><strong>“İyi ki.”</strong></p>
+      
+      <p>Biz mükemmel olmadık.<br>Ama gerçek olduk.<br>Kırıldık, sustuk, inat ettik…<br>Sonra yine sarıldık.<br>Ve her sarılışta biraz daha birbirimize ait hissettik.</p>
+      
+      <p>Senin yanında zamanın bir ağırlığı yok.<br>Birlikteyken dünya biraz daha yavaş dönüyor sanki.<br>Sesin, günün karmaşasını azaltıyor.<br>Dokunuşun, bütün gerginlikleri siliyor.</p>
+      
+      <p>Eskiden seni kaybetmekten korktuğumu yazmıştım.<br>Şimdi sana şunu söylemek istiyorum:<br>Ben artık seni korkuyla değil, sevgiyle tutuyorum.<br>Sahip olmak için değil, birlikte yürümek için yanındayım.</p>
+      
+      <p>Sen benim hayatımda bir tesadüf değilsin.<br>Sen, kalbimin bilinçli kararı oldun.</p>
+      
+      <p>Bazen gece uyumadan önce düşünüyorum…<br>Hayat beni farklı bir yola soksaydı,<br>başka bir masaya oturtsaydı,<br>başka bir kalabalığın içine atsaydı…<br>Yine bir şekilde seni bulur muydum diye.<br>İçimdeki ses hep aynı cevabı veriyor:<br><strong>Evet.</strong> Çünkü bazı insanlar kader değil, seçilmiş mucizedir.</p>
+      
+      <p>Sen benim mucizemsin.<br>Gülüşün benim en güzel manzaram.<br>Omzuna yaslandığımda hissettiğim o sakinlik, dünyanın hiçbir yerinde yok.<br>Bazen bir kelime bile etmeden anlaşabiliyoruz ya…<br>İşte o anlarda anlıyorum, bizim bağımız sadece cümlelerle değil, kalple kurulmuş.</p>
+      
+      <p>Bugün sana büyük sözler vermeyeceğim.<br>Ama küçük ve gerçek bir şey söyleyeceğim:<br>Yarın sabah uyandığımda da seni seveceğim.<br>Kavga ettiğimiz bir günün akşamında da.<br>Yorgun olduğumuz bir haftanın sonunda da.<br>Ve birlikte güldüğümüz en sıradan bir anda da.</p>
+      
+      <p>Çünkü sevgi sadece romantik anlarda değil,<br>birbirine sabır gösterdiğin günlerde büyür.</p>
+      
+      <p>Eğer bu mektubu okurken kalbin biraz yumuşadıysa,<br>bir anlığına gözlerin dalıp gittiyse,<br>bil ki şu an benim kalbim de seninle aynı ritimde atıyor.</p>
+      
+      <p class="letter-closing">İyi ki varsın.<br>İyi ki hayatımın içindesin.<br>İyi ki “biz” olduk.</p>
+      
+      <p class="signature">Sevgilim, [Adın] ❤️</p>
     </div>
     <button onclick="backToMain()">Geri qayıt</button>
   </div>
@@ -224,8 +248,8 @@
         if (id === 'music') {
           const player = document.getElementById('musicPlayer');
           if (player) {
-            player.currentTime = 0; // Başdan başla
-            player.play().catch(() => {}); // Autoplay bloklanırsa xəta verməsin
+            player.currentTime = 0;
+            player.play().catch(() => {});
           }
         }
 
@@ -247,7 +271,6 @@
       document.getElementById('unlock-overlay').classList.add('hidden');
       document.getElementById('correct-popup').classList.add('hidden');
 
-      // Musiqi dayandır (geri qayıdanda)
       const player = document.getElementById('musicPlayer');
       if (player) player.pause();
     }
