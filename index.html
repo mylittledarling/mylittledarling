@@ -11,7 +11,7 @@
 <body id="body">
   <div id="hearts-container"></div>
 
-  <!-- Açılma animasiyası (bütün bölmələr üçün) -->
+  <!-- Açılma animasiyası -->
   <div id="unlock-overlay" class="hidden">
     <div class="unlock-animation">
       <i class="fas fa-lock fa-8x" id="unlock-icon"></i>
@@ -69,7 +69,7 @@
     <button onclick="backToMain()">Geri qayıt</button>
   </div>
 
-  <!-- Məktub (premium stil) -->
+  <!-- Məktub -->
   <div id="letter" class="section hidden">
     <h2>Sənə yazdığım məktub ❤️</h2>
     <div class="content premium-letter">
@@ -244,7 +244,6 @@
         icon.classList.remove('unlocking');
         document.getElementById(id).classList.remove('hidden');
 
-        // Mahnı bölməsi açılarsa, başdan başla
         if (id === 'music') {
           const player = document.getElementById('musicPlayer');
           if (player) {
